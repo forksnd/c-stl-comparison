@@ -104,8 +104,10 @@ test_dict(size_t  n)
   
   for (size_t i = 0; i < n; i++) {
     int ret;
-    khiter_t k = kh_put(iun, dict, rand_get(), &ret);
-    kh_value(dict, k) = rand_get();
+    unsigned long value = rand_get();
+    unsigned long key = rand_get();
+    khiter_t k = kh_put(iun, dict, key, &ret);
+    kh_value(dict, k) = value;
   }
   rand_init();
   unsigned int s = 0;
