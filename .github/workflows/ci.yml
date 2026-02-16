@@ -11,9 +11,11 @@ jobs:
       run:  lscpu || echo "CPU information not available"
     - name: Compiler Information
       run:  cc -v
+    - name: Install dependencies
+      run:  sudo apt install libboost-dev
     - name: make
       run: make
     - name: make bench
       working-directory: ./bench
-      run: make
+      run: make BOOST=/usr/include
  
