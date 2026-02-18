@@ -108,9 +108,9 @@ bench-stl:
 	@./bench-stl.exe 50
 	@./bench-stl.exe 51
 
-# QT shall point to the the directory containing the file .pc are stored
+# QT shall point to the the directory containing the file .pc are stored (can be let empty if system installed)
 bench-qt:
-	@if test -n "$${QT}" ; then $(MAKE) bench-qt0 ; else echo "Nothing to be done for QT." ; fi
+	@(PKG_CONFIG_PATH="$${QT}" pkg-config Qt5Core && $(MAKE) bench-qt0) || echo "QT not installed"
 bench-qt0:
 	$(CXX) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -fPIC bench-qt.cpp common.c -o bench-qt.exe `PKG_CONFIG_PATH="$${QT}" pkg-config --libs --cflags Qt5Core`
 	@./bench-qt.exe 10
@@ -121,9 +121,9 @@ bench-qt0:
 	@./bench-qt.exe 42
 	@./bench-qt.exe 50
 
-# GLIB shall point to the the directory containing the file .pc are stored
+# GLIB shall point to the the directory containing the file .pc are stored (can be let empty if system installed)
 bench-glib:
-	@if test -n "$${GLIB}" ; then $(MAKE) bench-glib0 ; else echo "Nothing to be done for GLIB." ; fi
+	@(PKG_CONFIG_PATH="$${GLIB}" pkg-config glib-2.0 && $(MAKE) bench-glib0) || echo "GLIB not installed"
 bench-glib0:
 	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) bench-glib.c common.c -o bench-glib.exe `PKG_CONFIG_PATH="$${GLIB}" pkg-config --libs --cflags glib-2.0`
 	@./bench-glib.exe 10
@@ -133,11 +133,7 @@ bench-glib0:
 	@./bench-glib.exe 41
 	@./bench-glib.exe 50
 
-# KLIB shall point to the directory where the headers are
 bench-klib:
-	@if test -n "$(KLIB)" ; then $(MAKE) bench-klib0 ; else echo "Nothing to be done for KLIB." ; fi
-
-bench-klib0:
 	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I $(KLIB) bench-klib.c common.c -o bench-klib.exe
 	@./bench-klib.exe 10
 	@./bench-klib.exe 20
@@ -146,7 +142,6 @@ bench-klib0:
 	@./bench-klib.exe 41
 	@./bench-klib.exe 50
 
-# CMC shall point to the directory where the CMC main header is
 bench-cmc:
 	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I $(CMC) bench-cmc.c common.c -o bench-cmc.exe
 	@./bench-cmc.exe 20
@@ -183,7 +178,6 @@ bench-densehashmap0:
 	@./bench-densehashmap.exe 42
 	@./bench-densehashmap.exe 43
 
-# COLLECTIONC shall point to the directory where it is installed
 bench-collectionc:
 	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I $(COLLECTIONC)/src/include/  bench-collectionc.c common.c $(COLLECTIONC)/src/libCollections-C-fast.a -o bench-collectionc.exe
 	@./bench-collectionc.exe 10
@@ -342,7 +336,6 @@ bench-rigtorp-mpmc-queue0:
 	$(CXX) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I "$${RIGTORP_MPMC_QUEUE}" bench-rigtorp-mpmcqueue.cpp common.c -DMULTI_THREAD_MEASURE -o bench-mpmcqueue.exe -lpthread
 	@./bench-mpmcqueue.exe 60
 
-# CTL shall point to the source directory (not where the headers are)
 bench-ctl:
 	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I $(MLIB) -I $(CTL) bench-ctl.c common.c -o bench-ctl.exe
 	@./bench-ctl.exe 10
@@ -351,7 +344,6 @@ bench-ctl:
 	@./bench-ctl.exe 40
 	@./bench-ctl.exe 50
 
-# STC shall point to the source directory (not where the headers are)
 bench-stc:
 	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I $(STC)/include bench-stc.c common.c -o bench-stc.exe
 	@./bench-stc.exe 10
@@ -374,7 +366,6 @@ bench-pottery0:
 	@./bench-pottery.exe 41
 	@./bench-pottery.exe 50
 
-# CCLIB shall point to the source directory of CC (where the headers are)
 bench-CC:
 	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I $(CCLIB) bench-CC.c common.c -o bench-CC.exe
 	@./bench-CC.exe 10
