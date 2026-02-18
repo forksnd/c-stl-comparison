@@ -31,7 +31,7 @@ RM=rm -rf
 
 .PHONY: all pgo container queue string plain bench-mlib bench-stl bench-qt bench-glib bench-klib bench-libdynamic bench-sparsepp bench-collectionc bench-tommyds bench-flathashmap bench-emilib bench-emhash bench-hopscotchmap bench-mlib-thread bench-liblfds bench-concurrentqueue bench-boost bench-string bench-plain bench-rigtorp-mpmc-queue bench-cmc
 
-all: container-c container-cpp queue string plain bench-find-sort bench-maxdict
+all: container-c container-cpp queue string plain bench-find-sort
 
 pgo:
 	$(MAKE) all XCFLAGS="-fprofile-generate=pgo"
