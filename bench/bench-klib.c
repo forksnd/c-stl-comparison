@@ -113,7 +113,7 @@ test_dict(size_t  n)
   unsigned int s = 0;
   for (size_t i = 0; i < n; i++) {
     khiter_t k = kh_get(iun, dict, rand_get());
-    if (kh_exist(dict, k))
+    if (k != kh_end(dict))
       s += kh_value(dict, k);
   }
   g_result = s;
@@ -157,7 +157,7 @@ test_dict_big(size_t  n)
     char_array_t s1;
     sprintf(s1.a, "%u", rand_get());
     khiter_t k = kh_get(iub, dict, s1);
-    if (kh_exist(dict, k))
+    if (k != kh_end(dict))
       s ++;
   }
   g_result = s;
@@ -189,11 +189,11 @@ void bench_find_longest(size_t n)
   for (size_t i = 0; i < n; i++) {
     // if current element is the starting element of a sequence
     khiter_t k = kh_get(int, dict, arr[i]-1);
-    if (!kh_exist(dict, k)) {
+    if (k == kh_end(dict)) {
       // Then check for next elements in the sequence 
       int j = arr[i] + 1;
       k = kh_get(int, dict, j);
-      while (kh_exist(dict, k)) {
+      while (k != kh_end(dict)) {
         j++;
         k = kh_get(int, dict, j);
       }
@@ -203,6 +203,105 @@ void bench_find_longest(size_t n)
   }
 
   kh_destroy(int, dict);
+  free(arr);
+  g_result = ans;
+}
+
+/********************************************************************************************/
+// Undo collision interface between khash and khashl
+#undef kh_size
+#undef kh_end
+#undef kh_key
+#undef kh_val
+#undef kh_exist
+#undef kh_foreach
+#include "khashl.h"
+
+KHASHL_MAP_INIT(KH_LOCAL, iun_kashl_t, iun_kashl, unsigned long, unsigned long, kh_hash_uint64, kh_eq_generic)
+KHASHL_CMAP_INIT(KH_LOCAL, iub_kashl_t, iub_kashl, char_array_t, char_array_t, char_hash, char_equal_p)
+
+static inline khint_t int_hash_kashl(int value)
+{
+  return kh_hash_uint32((unsigned int) value);
+}
+
+KHASHL_SET_INIT(KH_LOCAL, int_kashl_t, int_kashl, int, int_hash_kashl, kh_eq_generic)
+
+static void
+test_dict_kashl(size_t n)
+{
+  iun_kashl_t *dict = iun_kashl_init();
+
+  for (size_t i = 0; i < n; i++) {
+    int absent;
+    unsigned long value = rand_get();
+    unsigned long key = rand_get();
+    khint_t k = iun_kashl_put(dict, key, &absent);
+    kh_val(dict, k) = value;
+  }
+  rand_init();
+  unsigned int s = 0;
+  for (size_t i = 0; i < n; i++) {
+    khint_t k = iun_kashl_get(dict, rand_get());
+    if (k != kh_end(dict))
+      s += kh_val(dict, k);
+  }
+  g_result = s;
+
+  iun_kashl_destroy(dict);
+}
+
+static void
+test_dict_big_kashl(size_t n)
+{
+  iub_kashl_t *dict = iub_kashl_init();
+
+  for (size_t i = 0; i < n; i++) {
+    int absent;
+    char_array_t s1, s2;
+    sprintf(s1.a, "%u", rand_get());
+    sprintf(s2.a, "%u", rand_get());
+    khint_t k = iub_kashl_put(dict, s1, &absent);
+    char_set(&kh_val(dict, k), s2);
+  }
+  rand_init();
+  unsigned int s = 0;
+  for (size_t i = 0; i < n; i++) {
+    char_array_t s1;
+    sprintf(s1.a, "%u", rand_get());
+    khint_t k = iub_kashl_get(dict, s1);
+    if (k != kh_end(dict))
+      s ++;
+  }
+  g_result = s;
+
+  iub_kashl_destroy(dict);
+}
+
+void bench_find_longest_kashl(size_t n)
+{
+  int *arr = (int*) malloc(n * sizeof(int));
+  for(size_t i = 0; i < n; i++)
+    arr[i] = rand_get();
+
+  int_kashl_t *dict = int_kashl_init();
+  int ans = 0;
+
+  for (size_t i = 0; i < n; i++) {
+    int absent;
+    int_kashl_put(dict, arr[i], &absent);
+  }
+
+  for (size_t i = 0; i < n; i++) {
+    if (int_kashl_get(dict, arr[i] - 1) == kh_end(dict)) {
+      int j = arr[i] + 1;
+      while (int_kashl_get(dict, j) != kh_end(dict))
+        j++;
+      ans = TST_MAX(ans, j - arr[i]);
+    }
+  }
+
+  int_kashl_destroy(dict);
   free(arr);
   g_result = ans;
 }
@@ -234,8 +333,11 @@ const config_func_t table[] = {
   { 110,   "Seq(Array)", C_N_SEQ_ARRAY, 0, test_array, 0},
   { 200,  "SSet(Btree)", C_N_SSET, 0, test_rbtree, 0},
   { 300,    "UMap U64(khash)", C_N_UMAP_U64, 0, test_dict, 0},
+  { 301,   "UMap U64(khashl)", C_N_UMAP_U64, 0, test_dict_kashl, 0},
   { 320, "UMap Big(khash)", C_N_UMAP_BIG, 0, test_dict_big, 0},
-  { 340, "USet Longest(hset)", C_N_FIND_SEQ, 0, bench_find_longest, 0},
+  { 321, "UMap Big(khashl)", C_N_UMAP_BIG, 0, test_dict_big_kashl, 0},
+  { 340, "USet Longest(khash)", C_N_FIND_SEQ, 0, bench_find_longest, 0},
+  { 341, "USet Longest(khashl)", C_N_FIND_SEQ, 0, bench_find_longest_kashl, 0},
   { 500,    "Sort", C_N_SORT, 0, test_sort, 0},
 };
 

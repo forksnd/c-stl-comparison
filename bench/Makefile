@@ -130,8 +130,11 @@ bench-klib:
 	@./bench-klib.exe 110 $(LOG)
 	@./bench-klib.exe 200 $(LOG)
 	@./bench-klib.exe 300 $(LOG)
+	@./bench-klib.exe 301 $(LOG)
 	@./bench-klib.exe 320 $(LOG)
-#	@./bench-klib.exe 340 $(LOG)	# Result is buggy: not run
+	@./bench-klib.exe 321 $(LOG)
+	@./bench-klib.exe 340 $(LOG)
+	@./bench-klib.exe 341 $(LOG)
 	@./bench-klib.exe 500 $(LOG)
 
 bench-cmc:
