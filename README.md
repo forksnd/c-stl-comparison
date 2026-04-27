@@ -299,54 +299,54 @@ For a container of such library that encapsulates a collection of objects of bas
 
 ## Synthesis
 
-| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB |
-|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|
-| License                     | NA       | BSD2   | MIT     | MIT     | MIT   | LGPL3   | MIT    | LGPL2.1| MIT    | MIT  |
-| C language                  | NA       | >=C99  | >=C99   | >=C99   | >=C99 | >=C99|>=C11* or >=C23|>=C89|>=C99* or >=C23|>=C99|
-| Pure C                      | NA       | Y      | Y       | Y       | Y     | Y       | Y      | Y      | Y      | Y    |
-| Header only                 | Y        | Y      | Y*      | Y       | Y     | N       | Y      | N      | Y      | Y    |
-| Generic mechanism           | template | TM     | TH      | TM      | TH    | VP      | M+GO   | VP     | M      | TM   |
-| type safe                   | Y        | Y      | Y       | Y       | Y     | N       | Y*     | N      | N*     | Y    |
+| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB | CCC |
+|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|-----|
+| License                     | NA       | BSD2   | MIT     | MIT     | MIT   | LGPL3   | MIT    | LGPL2.1| MIT    | MIT  | Apache |
+| C language                  | NA       | >=C99  | >=C99 | >=C99 | >=C99 |>=C99|>=C11* or >=C23|>=C89|>=C99* or >=C23|>=C99|>=C23|
+| Pure C                      | NA       | Y      | Y       | Y       | Y     | Y       | Y      | Y      | Y      | Y    | Y   |
+| Header only                 | Y        | Y      | Y*      | Y       | Y     | N       | Y      | N      | Y      | Y    | N   |
+| Generic mechanism           | template | TM     | TH      | TM      | TH    | VP      | M+GO   | VP     | M      | TM   | VP  |
+| type safe                   | Y        | Y      | Y       | Y       | Y     | N       | Y*     | N      | N*     | Y    | N   |
 
-| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB |
-|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|
-| integer/float support       | Y        | Y      | Y       | Y       | Y     | Y       | Y      | Y*     | Y      | Y    |
-| struct POD support          | Y        | Y      | Y       | Y       | Y     | N       | Y      | Y*     | Y      | Y    |
-| array support               | Y        | Y      | N       | N       | N     | N       | N      | Y*     | N      | N    |
-| C object support            | Y        | Y      | Y       | Y       | Y     | N       | Y      | Y*     | N      | Y    |
-| C++ class support           | Y        | Y      | N       | N       | N     | N       | N      | N      | N      | N    |
+| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB | CCC |
+|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|-----|
+| integer/float support       | Y        | Y      | Y       | Y       | Y     | Y*      | Y      | Y*     | Y      | Y    | Y   |
+| struct POD support          | Y        | Y      | Y       | Y       | Y     | Y*      | Y      | Y*     | Y      | Y    | Y   |
+| array support               | Y        | Y      | N       | N       | N     | Y*      | N      | Y*     | N      | N    | Y   |
+| C object support            | Y        | Y      | Y       | Y       | Y     | Y*      | Y      | Y*     | N      | Y    | Y   |
+| C++ class support           | Y        | Y      | N       | N       | N     | N       | N      | N      | N      | N    | N   |
 
-| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB |
-|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|
-| Assignment semantics        | Y        | Y      | Y       | Y       | Y     | Y       | Y      | Y      | Y      | Y    |
-| Copy semantics              | Y        | Y      | Y*      | N       | Y*    | Y       | N      | Y      | N      | N    |
-| Move semantics              | Y        | Y      | N       | N       | N     | N       | N      | N      | N      | N    |
-| spatial separation          | Y        | Y      | N       | N       | N     | NA      | Y      | NA     | N      | N    |
-| Adaptor Layer               | N        | Y      | N       | N       | N     | N       | N      | N      | N      | N    |
-| Basic emplace support       | Y        | Y      | Y       | N       | N     | N       | N      | N      | N      | N    |
-| Enhanced emplace support    | Y        | Y      | N       | N       | N     | N       | N      | N      | N      | N    |
-| Iterator support            | Y        | Y      | Y       | N       | Y     | Y       | Y      | N      | N      | Y    |
-| Sort algorithm              | Y        | Y      | Y       | N       | Y     | Y       | N      | Y      | N      | Y    |
-| Enhanced Sort algorithm     | Y        | Y      | Y       | N       | Y     | Y       | N      | Y      | N      | N    |
+| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB | CCC |
+|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|-----|
+| Assignment semantics        | Y        | Y      | Y       | Y       | Y     | Y       | Y      | Y      | Y      | Y    | Y   |
+| Copy semantics              | Y        | Y      | Y*      | N       | Y*    | Y       | N      | Y      | N      | N    | Y*  |
+| Move semantics              | Y        | Y      | N       | N       | N     | N       | N      | N      | N      | N    | N   |
+| spatial separation          | Y        | Y      | N       | N       | N     | NA      | Y      | NA     | N      | N    | NA  |
+| Adaptor Layer               | N        | Y      | N       | N       | N     | N       | N      | N      | N      | N    | N   |
+| Basic emplace support       | Y        | Y      | Y       | N       | N     | N       | N      | N      | N      | N    | N   |
+| Enhanced emplace support    | Y        | Y      | N       | N       | N     | N       | N      | N      | N      | N    | N   |
+| Iterator support            | Y        | Y      | Y       | N       | Y     | Y       | Y      | N      | N      | Y    | Y   |
+| Sort algorithm              | Y        | Y      | Y       | N       | Y     | Y       | N      | Y      | N      | Y    | Y   |
+| Enhanced Sort algorithm     | Y        | Y      | Y       | N       | Y     | Y       | N      | Y      | N      | N    | Y   |
 
-| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB |
-|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|
-| single linkage definition   | N*       | Y      | Y       | Y       | N     | Y       | N      | Y      | Y      | N    |
-| Full abstraction            | Y        | Y      | Y*      | Y       | Y*    | Y       | Y      | N      | Y      | Y    |
-| Contract violation checks   | Y        | Y      | N       | N       | N     | N       | N      | N      | N      | N    |
-| Natural usage               | Y        | N      | N       | N       | N     | N       | N      | N      | Y      | N    |
-| Basic type is stored        | Y        | Y      | Y       | Y       | Y     | N       | Y      | N      | Y      | Y    |
-| Explicit instantiation      | N        | Y      | Y       | Y       | Y     | N       | N      | N      | N      | Y    |
-| prefixed function           | Y        | Y      | Y       | Y       | Y     | Y       | Y      | Y      | Y      | Y    |
+| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB | CCC |
+|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|-----|
+| single linkage definition   | N*       | Y      | Y       | Y       | N     | Y       | N      | Y      | Y      | N    | Y   |
+| Full abstraction            | Y        | Y      | Y*      | Y       | Y*    | Y       | Y      | N      | Y      | Y    | N   |
+| Contract violation checks   | Y        | Y      | N       | N       | N     | N       | N      | N      | N      | N    | N   |
+| Natural usage               | Y        | N      | N       | N       | N     | N       | N      | N      | Y      | N    | N   |
+| Basic type is stored        | Y        | Y      | Y       | Y       | Y     | N       | Y      | N      | Y      | Y    | Y?  |
+| Explicit instantiation      | N        | Y      | Y       | Y       | Y     | N       | N      | N      | N      | Y    | N   |
+| prefixed function           | Y        | Y      | Y       | Y       | Y     | Y       | Y      | Y      | Y      | Y    | Y   |
 
-| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB |
-|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|
-| memory error handling       | except|abort, except| retcode |retcode|none   | retcode |retcode | retcode| none  |retcode|
-| destructors on exception    | Y        | Y*     | N       | N       | N     | N       | N      | N      | N      | N    |
-| custom memory support       | Y        | Y      | Y       | Y       | N     | Y       | Y      | N      | Y      | Y    |
-| context for memory support  | N        | Y      | Y       | N       | N     | N       | N      | N      | Y      | N    |
-| Forward declaration support | N        | Y*     | Y       | N       | N     | N       | N      | N      | N      | N    |
-| Serialization               | N        | JSON   | N       | N       | N     | N       | N      | N      | N      | N    |
+| Characteristics             | STL      | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     |  GLIB  | STB_DS | KLIB | CCC |
+|-----------------------------|----------|--------|---------|---------|-------|---------|--------|--------|--------|------|-----|
+| memory error handling       | except|abort, except| retcode |retcode|none   | retcode |retcode | retcode| none  |retcode|retcode|
+| destructors on exception    | Y        | Y*     | N       | N       | N     | N       | N      | N      | N      | N    | N   |
+| custom memory support       | Y        | Y      | Y       | Y       | N     | Y       | Y      | N      | Y      | Y    | Y   |
+| context for memory support  | N        | Y      | Y       | N       | N     | N       | N      | N      | Y      | N    | Y   |
+| Forward declaration support | N        | Y*     | Y       | N       | N     | N       | N      | N      | N      | N    | N   |
+| Serialization               | N        | JSON   | N       | N       | N     | N       | N      | N      | N      | N    | N   |
 
 * C11*: means C11 + typeof extension
 * C99*: means C99 + typeof extension
@@ -354,71 +354,71 @@ For a container of such library that encapsulates a collection of objects of bas
 * N*: even it appears to be type safe, it is not and it is easy to misuse it.
 * NA: the question has no meaning for this library.
 
-| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB |
-|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|
-| Singly Linked Non-Intrusive list  | Y         | Y      | N       | N       | Y     | Y       | N      | Y    |N      | Y    |
-| Doubly Linked Non-Intrusive list  | Y         | N      | N       | N       | Y     | Y       | Y      | Y    |N      | N    |
-| Singly Linked, Dually Push Non-Intrusive list | N | Y  | Y       | N       | N     | N       | N      | N    |N      | N    |
-| Singly Linked Intrusive list      | N         | N      | N       | N       | N     | N       | N      | N    |N      | N    |
-| Doubly Linked Intrusive list      | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| Dynamic array                     | Y         | Y      | Y       | Y       | Y     | Y       | Y      | Y    |Y      | Y    |
-| Static array                      | Y         | N      | N       | N       | Y     | N       | N      | N    |N      | N    |
+| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB | CCC |
+|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|-----|
+| Singly Linked Non-Intrusive list  | Y         | Y      | N       | N       | Y     | Y       | N      | Y    |N      | Y    | Y   |
+| Doubly Linked Non-Intrusive list  | Y         | N      | N       | N       | Y     | Y       | Y      | Y    |N      | N    | N   |
+| Singly Linked, Dually Push Non-Intrusive list | N | Y  | Y       | N       | N     | N       | N      | N    |N      | N    | N   |
+| Singly Linked Intrusive list      | N         | N      | N       | N       | N     | N       | N      | N    |N      | N    | Y   |
+| Doubly Linked Intrusive list      | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | Y   |
+| Dynamic array                     | Y         | Y      | Y       | Y       | Y     | Y       | Y      | Y    |Y      | Y    | Y   |
+| Static array                      | Y         | N      | N       | N       | Y     | N       | N      | N    |N      | N    | Y   |
 
-| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB |
-|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|
-| pair                              | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| tuple                             | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| optional                          | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| variant                           | Y         | Y      | N       | N       | N     | N       | N      | Y    |N      | N    |
-| bitset                            | Y         | Y      | Y       | Y       | N     | N       | N      | N    |N      | N    |
-| Dynamic character string          | Y         | Y      | Y       | N       | Y     | N       | N      | Y    |N      | Y    |
-| string_view                       | Y         | N      | Y       | N       | N     | N       | N      | N    |N      | N    |
-| deque                             | Y         | Y      | Y       | Y       | Y     | Y       | N      | Y    |N      | N    |
-| queue                             | Y         | Y      | Y       | Y       | Y     | Y       | N      | Y    |N      | N    |
-| priority queue                    | Y         | Y      | Y       | Y       | Y     | Y       | N      | N    |N      | N    |
-| stack                             | Y         | Y      | Y       | N       | Y     | Y       | N      | N    |N      | N    |
-| Bounded Queue                     | N         | Y      | N       | N       | N     | N       | N      | Y    |N      | N    |
+| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB | CCC |
+|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|-----|
+| pair                              | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| tuple                             | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| optional                          | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| variant                           | Y         | Y      | N       | N       | N     | N       | N      | Y    |N      | N    | N   |
+| bitset                            | Y         | Y      | Y       | Y       | N     | N       | N      | N    |N      | N    | Y   |
+| Dynamic character string          | Y         | Y      | Y       | N       | Y     | N       | N      | Y    |N      | Y    | N   |
+| string_view                       | Y         | N      | Y       | N       | N     | N       | N      | N    |N      | N    | N   |
+| deque                             | Y         | Y      | Y       | Y       | Y     | Y       | N      | Y    |N      | N    | Y   |
+| queue                             | Y         | Y      | Y       | Y       | Y     | Y       | N      | Y    |N      | N    | N   |
+| priority queue                    | Y         | Y      | Y       | Y       | Y     | Y       | N      | N    |N      | N    | Y   |
+| stack                             | Y         | Y      | Y       | N       | Y     | Y       | N      | N    |N      | N    | N   |
+| Bounded Queue                     | N         | Y      | N       | N       | N     | N       | N      | Y    |N      | N    | Y   |
 
-| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB |
-|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|
-| set                               | Y         | Y      | Y       | N       | N     | Y       | N      | Y    |N      | Y    |
-| multiset                          | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| map                               | Y         | Y      | N       | N       | Y     | Y       | N      | N    |N      | Y    |
-| multimap                          | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| unordered_set                     | Y         | Y      | Y       | Y       | Y     | Y       | Y      | N    |Y      | Y    |
-| unordered_multiset                | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    |
-| unordered_map                     | Y         | Y      | Y       | Y       | Y     | Y       | Y      | N    |Y      | Y    |
-| unordered_multimap                | Y         | N      | N       | Y       | N     | N       | N      | Y    |N      | N    |
-| flat_set                          | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    |
-| flat_multiset                     | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    |
-| flat_map                          | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    |
-| flat_multimap                     | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    |
+| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB | CCC |
+|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|-----|
+| set                               | Y         | Y      | Y       | N       | N     | Y       | N      | Y    |N      | Y    | Y   |
+| multiset                          | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| map                               | Y         | Y      | N       | N       | Y     | Y       | N      | N    |N      | Y    | N   |
+| multimap                          | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| unordered_set                     | Y         | Y      | Y       | Y       | Y     | Y       | Y      | N    |Y      | Y    | Y   |
+| unordered_multiset                | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    | N   |
+| unordered_map                     | Y         | Y      | Y       | Y       | Y     | Y       | Y      | N    |Y      | Y    | N   |
+| unordered_multimap                | Y         | N      | N       | Y       | N     | N       | N      | Y    |N      | N    | N   |
+| flat_set                          | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    | N   |
+| flat_multiset                     | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    | N   |
+| flat_map                          | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    | Y   |
+| flat_multimap                     | Y         | N      | N       | Y       | N     | N       | N      | N    |N      | N    | N   |
 
-| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB |
-|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|
-| unique_ptr                        | Y         | N      | Y       | N       | N     | N       | N      | N    |N      | N    |
-| shared_ptr                        | Y         | Y      | Y       | N       | N     | N       | N      | N    |N      | N    |
-| advanced shared_ptr               | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| weak_ptr                          | Y         | N      | N       | N       | N     | N       | N      | N    |N      | N    |
-| Function Object                   | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| Span                              | Y         | N      | Y       | N       | N     | N       | N      | N    |N      | N    |
-| MDSpan                            | Y         | N      | Y       | N       | N     | N       | N      | N    |N      | N    |
-| Bounded String                    | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
+| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB | CCC |
+|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|-----|
+| unique_ptr                        | Y         | N      | Y       | N       | N     | N       | N      | N    |N      | N    | N   |
+| shared_ptr                        | Y         | Y      | Y       | N       | N     | N       | N      | N    |N      | N    | N   |
+| advanced shared_ptr               | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| weak_ptr                          | Y         | N      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| Function Object                   | Y         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| Span                              | Y         | N      | Y       | N       | N     | N       | N      | N    |N      | N    | N   |
+| MDSpan                            | Y         | N      | Y       | N       | N     | N       | N      | N    |N      | N    | N   |
+| Bounded String                    | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
 
-| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB |
-|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|
-| Atomic Shared Register SPSC       | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| Atomic Shared Register MPSC       | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| Atomic Shared Register SPMC       | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| Atomic Shared Register MPMC       | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
-| Skip List                         | N         | N      | N       | Y       | N     | N       | N      | N    |N      | N    |
-| Sorted Bidirectional Map          | N         | N      | N       | Y       | N     | N       | N      | N    |N      | N    |
-| Tree                              | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    |
+| Containers                        | STL       | M*LIB  | STC     | CMC     | CTL   | CollecC | CC     | GLIB |STB_DS | KLIB | CCC |
+|-----------------------------------|-----------|--------|---------|---------|-------|---------|--------|------|-------|------|-----|
+| Atomic Shared Register SPSC       | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| Atomic Shared Register MPSC       | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| Atomic Shared Register SPMC       | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| Atomic Shared Register MPMC       | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
+| Skip List                         | N         | N      | N       | Y       | N     | N       | N      | N    |N      | N    | N   |
+| Sorted Bidirectional Map          | N         | N      | N       | Y       | N     | N       | N      | N    |N      | N    | N   |
+| Tree                              | N         | Y      | N       | N       | N     | N       | N      | N    |N      | N    | N   |
 
 
-| Algorithms                        | STL  | M*LIB | STC | CMC | CTL |CollecC| CC | GLIB |STB_DS | KLIB |
-|-----------------------------------|------|-------|-----|-----|-----|-------|----|------|-------|------|
-| Sort/Min/Max/...                  | Y    | Y     | Y   | N   | Y   | Y     | Y  | Y    | N     |  Y   |
+| Algorithms                        | STL  | M*LIB | STC | CMC | CTL |CollecC| CC | GLIB |STB_DS | KLIB | CCC |
+|-----------------------------------|------|-------|-----|-----|-----|-------|----|------|-------|------|-----|
+| Sort/Min/Max/...                  | Y    | Y     | Y   | N   | Y   | Y     | Y  | Y    | N     |  Y   | Y   |
 
 If you see any mistakes in this report,
 or want to include another C library,
@@ -483,41 +483,41 @@ and generate the different executables.
 
 What can be objectively compared is the size of the programs:
 
-| Array-Int programs      | STL | M*LIB | STC | CMC  | CTL | CollecC | CC  | GLIB | STB_DS | KLIB |
-|-------------------------|-----|-------|-----|------|-----|---------|-----|------|--------|------|
-| number of characters    | 236 | 373   | 558 | 1011 | 593 | 885     | 611 | 696  | 817    | 783  |
-| number of line of codes | 13  | 18    | 34  | 46   | 25  | 46      | 34  | 38   | 43     | 28   |
-| number of workarounds   | 0   | 0     | 0   | 2    | 2   | 2       | 0   | 0    | 1      | 2    |
+| Array-Int programs      | STL | M*LIB | STC | CMC  | CTL | CollecC | CC  | GLIB | STB_DS | KLIB | CCC  |
+|-------------------------|-----|-------|-----|------|-----|---------|-----|------|--------|------|------|
+| number of characters    | 236 | 373   | 558 | 1011 | 593 | 885     | 611 | 696  | 817    | 783  | 1395 |
+| number of line of codes | 13  | 18    | 34  | 46   | 25  | 46      | 34  | 38   | 43     | 28   | 55   |
+| number of workarounds   | 0   | 0     | 0   | 2    | 2   | 2       | 0   | 0    | 1      | 2    | 0    |
 
-| Array-Str programs      | STL | M*LIB | STC | CMC  | CTL | CollecC | CC  | GLIB | STB_DS | KLIB |
-|-------------------------|-----|-------|-----|------|-----|---------|-----|------|--------|------|
-| number of characters    | 274 | 442   | 564 | 1053 | 762 | 839     | 651 | 908  | 881    | 1497 |
-| number of line of codes | 14  | 19    | 36  | 45   | 29  | 47      | 33  | 44   | 45     | 55   |
-| number of workarounds   | 0   | 0     | 0   | 2    | 3   | 1       | 0   | 0    | 1      | 3    |
+| Array-Str programs      | STL | M*LIB | STC | CMC  | CTL | CollecC | CC  | GLIB | STB_DS | KLIB | CCC  |
+|-------------------------|-----|-------|-----|------|-----|---------|-----|------|--------|------|------|
+| number of characters    | 274 | 442   | 564 | 1053 | 762 | 839     | 651 | 908  | 881    | 1497 | 1478 |
+| number of line of codes | 14  | 19    | 36  | 45   | 29  | 47      | 33  | 44   | 45     | 55   | 54   |
+| number of workarounds   | 0   | 0     | 0   | 2    | 3   | 1       | 0   | 0    | 1      | 3    | 0    |
 
-| Array-mpz programs      | STL | M*LIB | STC  | CMC  | CTL  | CollecC | CC   | GLIB | STB_DS | KLIB |
-|-------------------------|-----|-------|------|------|------|---------|------|------|--------|------|
-| number of characters    | 261 | 505   | 1222 | 1740 | 1407 | 1337    | 1120 | 840  | 1255   | 1041 |
-| number of line of codes | 14  | 20    | 44   | 65   | 42   | 68      | 49   | 47   | 61     | 43   |
-| number of workarounds   | 0   | 0     | 3    | 7    | 5    | 1       | 2    | 0    | 4      | 5    |
+| Array-mpz programs      | STL | M*LIB | STC  | CMC  | CTL  | CollecC | CC   | GLIB | STB_DS | KLIB | CCC  |
+|-------------------------|-----|-------|------|------|------|---------|------|------|--------|------|------|
+| number of characters    | 261 | 505   | 1222 | 1740 | 1407 | 1337    | 1120 | 840  | 1255   | 1041 | 1585 |
+| number of line of codes | 14  | 20    | 44   | 65   | 42   | 68      | 49   | 47   | 61     | 43   | 61   |
+| number of workarounds   | 0   | 0     | 3    | 7    | 5    | 1       | 2    | 0    | 4      | 5    | 0    |
 
-| UMap-Int programs       | STL | M*LIB | STC | CMC  | CTL  | CollecC | CC  | GLIB | STB_DS | KLIB |
-|-------------------------|-----|-------|-----|------|------|---------|-----|------|--------|------|
-| number of characters    | 359 | 462   | 777 | 1640 | 1090 | 1241    | 442 | 984  | 1035   | 774  |
-| number of line of codes | 15  | 19    | 37  | 62   | 47   | 54      | 26  | 42   | 50     | 43   |
-| number of workarounds   | 0   | 0     | 0   | 1    | 1    | 0       | 0   | 0    | 3      | 0    |
+| UMap-Int programs       | STL | M*LIB | STC | CMC  | CTL  | CollecC | CC  | GLIB | STB_DS | KLIB | CCC  |
+|-------------------------|-----|-------|-----|------|------|---------|-----|------|--------|------|------|
+| number of characters    | 359 | 462   | 777 | 1640 | 1090 | 1241    | 442 | 984  | 1035   | 774  | 2140 |
+| number of line of codes | 15  | 19    | 37  | 62   | 47   | 54      | 26  | 42   | 50     | 43   | 85   |
+| number of workarounds   | 0   | 0     | 0   | 1    | 1    | 0       | 0   | 0    | 3      | 0    | 0    |
 
-| UMap-Str programs       | STL | M*LIB | STC | CMC  | CTL  | CollecC | CC  | GLIB | STB_DS | KLIB |
-|-------------------------|-----|-------|-----|------|------|---------|-----|------|--------|------|
-| number of characters    | 436 | 615   | 870 | 1627 | 1756 | 929     | 522 | 1514 | 991    | 837  |
-| number of line of codes | 16  | 20    | 37  | 63   | 64   | 35      | 26  | 58   | 48     | 43   |
-| number of workarounds   | 0   | 0     | 0   | 1    | 4    | 0       | 0   | 0    | 2      | 0    |
+| UMap-Str programs       | STL | M*LIB | STC | CMC  | CTL  | CollecC | CC  | GLIB | STB_DS | KLIB | CCC  |
+|-------------------------|-----|-------|-----|------|------|---------|-----|------|--------|------|------|
+| number of characters    | 436 | 615   | 870 | 1627 | 1756 | 929     | 522 | 1514 | 991    | 837  | 2350 |
+| number of line of codes | 16  | 20    | 37  | 63   | 64   | 35      | 26  | 58   | 48     | 43   | 93   |
+| number of workarounds   | 0   | 0     | 0   | 1    | 4    | 0       | 0   | 0    | 2      | 0    | 0    |
 
-| UMap-mpz programs       | STL | M*LIB | STC  | CMC  | CTL  | CollecC | CC   | GLIB | STB_DS | KLIB |
-|-------------------------|-----|-------|------|------|------|---------|------|------|--------|------|
-| number of characters    | 797 | 1018  | 1849 | 2387 | 1964 | 1893    | 1443 | 1667 | NA     | 1754 |
-| number of line of codes | 38  | 39    | 55   | 99   | 79   | 87      | 62   | 75   | NA     | 84   |
-| number of workarounds   | 0   | 0     | 4    | 2    | 4    | 0       | 2    | 0    | NA     | 3    |
+| UMap-mpz programs       | STL | M*LIB | STC  | CMC  | CTL  | CollecC | CC   | GLIB | STB_DS | KLIB | CCC  |
+|-------------------------|-----|-------|------|------|------|---------|------|------|--------|------|------|
+| number of characters    | 797 | 1018  | 1849 | 2387 | 1964 | 1893    | 1443 | 1667 | NA     | 1754 | 3137 |
+| number of line of codes | 38  | 39    | 55   | 99   | 79   | 87      | 62   | 75   | NA     | 84   | 132  |
+| number of workarounds   | 0   | 0     | 4    | 2    | 4    | 0       | 2    | 0    | NA     | 3    | 1    |
 
 
 As ergonomic is a personal judgement, no conclusion will be provided.
@@ -543,6 +543,7 @@ More specialized C libraries are added. The tested C libraries are:
 
 * Bstrlib (for string)
 * CC
+* CCC
 * CMC
 * Collections C
 * CTL
