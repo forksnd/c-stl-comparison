@@ -12,6 +12,7 @@ LIB_TO_SUFFIX = {
     "CTL": "ctl",
     "CollecC": "collectionsC",
     "CC": "CC",
+    "CCC": "ccc",
     "GLIB": "glib",
     "STB_DS": "stb",
     "KLIB": "klib",
