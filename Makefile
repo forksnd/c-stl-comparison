@@ -121,10 +121,10 @@ external/Collections-C/src/libCollections-C.a: external/Collections-C
 	cd external/Collections-C/src && $(AR) $(ARFLAGS) libCollections-C.a *.o
 
 external/qlibc/lib/libqlibc.a: external/qlibc
-	cd external/qlibc && ./configure CFLAGS=$(BUILD_CFLAGS) && make
+	cd external/qlibc && ./configure CFLAGS="$(BUILD_CFLAGS)" && make
 
 external/libsrt/src/.libs/libsrt.a: external/libsrt
-	cd external/libsrt && ./bootstrap.sh && ./configure CFLAGS=$(BUILD_CFLAGS) && make -j2
+	cd external/libsrt && ./bootstrap.sh && ./configure CFLAGS="$(BUILD_CFLAGS)" && make -j2
 
 external/liblfds7.1.1/bin/liblfds711.a: external/liblfds7.1.1
 	cd external/liblfds7.1.1/liblfds7.1.1/liblfds711/build/gcc_gnumake && make
