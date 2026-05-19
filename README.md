@@ -529,6 +529,83 @@ You should open the different provided programs and make your own choice based o
 
 However, we can still conclude that even the best C library in this domain is more verbose than the C++.
 
+We can also compare the size of the generated programs.
+The programs are built and link with "-ffunction-sections -fdata-sections -Wl,--gc-sections"
+in order to get a fair comparison (so that the functions not used are discarded).
+
+| array-int size | bytes |
+|----------------|-------|
+| STC            | 16096 |
+| GLIB           | 16128 |
+| M*LIB          | 16272 |
+| CC             | 16288 |
+| CTL            | 16472 |
+| KLIB           | 16512 |
+| CollecC        | 16520 |
+| STL            | 17256 |
+| CMC            | 17576 |
+
+| array-str size | bytes |
+|----------------|-------|
+| GLIB           | 16264 |
+| M*LIB          | 16520 |
+| CollecC        | 16568 |
+| CC             | 16608 |
+| KLIB           | 16688 |
+| CTL            | 16960 |
+| STC            | 17064 |
+| CMC            | 17616 |
+| STL            | 19464 |
+
+| array-mpz size | bytes |
+|----------------|-------|
+| STC            | 16192 |
+| GLIB           | 16264 |
+| M*LIB          | 16424 |
+| CC             | 16448 |
+| CTL            | 16640 |
+| KLIB           | 16648 |
+| CollecC        | 16656 |
+| CMC            | 17848 |
+| STL            | 18480 |
+
+| umap-int size | bytes |
+|---------------|-------|
+| STC           | 16208 |
+| GLIB          | 16224 |
+| M*LIB         | 16368 |
+| CC            | 16520 |
+| CollecC       | 16712 |
+| CTL           | 16800 |
+| CMC           | 17408 |
+| STL           | 18704 |
+
+| umap-str size | bytes |
+|---------------|-------|
+| GLIB          | 16368 |
+| CollecC       | 16640 |
+| M*LIB         | 16672 |
+| CC            | 16808 |
+| STC           | 17224 |
+| CTL           | 17384 |
+| CMC           | 17480 |
+| STL           | 20672 |
+
+| umap-mpz size | bytes |
+|---------------|-------|
+| STC           | 16304 |
+| GLIB          | 16360 |
+| M*LIB         | 16600 |
+| CC            | 16744 |
+| CollecC       | 16848 |
+| CTL           | 16976 |
+| STL           | 19680 |
+| CMC           | 21800 |
+
+As conclusion, the size of most programs are practically the same.
+
+NOTE: GLIB is dynamically linked instead of being statically linked.
+
 
 # Performance Comparison
 

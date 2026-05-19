@@ -24,7 +24,8 @@ CC=cc
 C99=$(CC) -std=c99
 C11=$(CC) -std=c11
 C23=$(CC) -std=c23
-CXX=c++ -std=c++11
+CXX=c++
+CXX11=$(CXX) -std=c++11
 # To measure code size, we need to remove the sanitizers
 CFLAGS=-O0 -Wall -DNDEBUG -fsanitize=address,undefined,leak -Werror=incompatible-pointer-types -g
 BUILD_CFLAGS=-O2 -DNDEBUG -ffunction-sections -fdata-sections
@@ -38,7 +39,7 @@ ARFLAGS=cr
 all: array umap glib
 
 clean:
-	$(RM) *~ *.exe **/*~
+	$(RM) *~ *.exe **/*~ time.log
 	cd bench && $(MAKE) clean
 
 ###########################################################
@@ -157,13 +158,13 @@ array-c23-test:
 array-c23: array-int-ccc.exe array-str-ccc.exe array-mpz-ccc.exe
 
 array-mpz-stl.exe: array-mpz/array-stl.cc
-	$(CXX) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
+	$(CXX11) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
 
 array-int-stl.exe: array-int/array-stl.cc
-	$(CXX) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
+	$(CXX11) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
 
 array-str-stl.exe: array-str/array-stl.cc
-	$(CXX) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
+	$(CXX11) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
 
 array-mpz-mlib.exe: array-mpz/array-mlib.c external/mlib 
 	$(C99) $(CFLAGS) -Iexternal/mlib $< -o $@ $(LDFLAGS)
@@ -264,13 +265,13 @@ umap-c23-test:
 umap-c23: umap-int-ccc.exe umap-str-ccc.exe umap-mpz-ccc.exe
 
 umap-mpz-stl.exe: umap-mpz/umap-stl.cc
-	$(CXX) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
+	$(CXX11) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
 
 umap-int-stl.exe: umap-int/umap-stl.cc
-	$(CXX) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
+	$(CXX11) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
 
 umap-str-stl.exe: umap-str/umap-stl.cc
-	$(CXX) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
+	$(CXX11) $(CFLAGS) $< -o $@ -lgmpxx $(LDFLAGS)
 
 umap-mpz-mlib.exe: umap-mpz/umap-mlib.c external/mlib 
 	$(C99) $(CFLAGS) -Iexternal/mlib $< -o $@ $(LDFLAGS)
@@ -385,11 +386,11 @@ umap-str-glib.exe: umap-str/umap-glib.c
 # 		Measure code size of the examples
 ###########################################################
 measure-size:
-	$(MAKE)	clean
-	$(MAKE) all CFLAGS="-Os -DNDEBUG" LDFLAGS="-Wl,--gc-sections -lgmp"
-	@echo "Measuring code size of the examples..."
+	@$(MAKE)	clean 1>&2 
+	@$(RM) `find external -name '*.a'` 1>&2 
+	@$(MAKE) all CC="/bin/time -o time.log -a -v cc" CXX="/bin/time -o time.log -a -v c++" CFLAGS="-Os -DNDEBUG" LDFLAGS="-Wl,--gc-sections -lgmp" BUILD_CFLAGS="-Os -DNDEBUG -ffunction-sections -fdata-sections" 1>&2 
 	@for prefix in array-int array-str array-mpz umap-int umap-str umap-mpz; do \
-		echo For $$prefix : ; \
+		echo "Measuring code size for $$prefix :" ; \
 		for exe in $$prefix*.exe; do \
 			size=$$(stat -c%s "$$exe"); \
 			echo "$$size bytes for $$exe"; \
