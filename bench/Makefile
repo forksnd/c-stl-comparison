@@ -152,7 +152,7 @@ bench-cmc:
 	@./bench-cmc.exe 300 $(LOG)
 
 bench-collectionc:
-	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I $(COLLECTIONC)/src/include/  bench-collectionc.c common.c $(COLLECTIONC)/src/libCollections-C-fast.a -o bench-collectionc.exe
+	$(CC) $(CFLAGS) $(XCFLAGS) $(CPPFLAGS) -I $(COLLECTIONC)/src/include/  bench-collectionc.c common.c $(COLLECTIONC)/src/libCollections-C.a -o bench-collectionc.exe
 	@./bench-collectionc.exe 100 $(LOG)
 	@./bench-collectionc.exe 110 $(LOG)
 	@./bench-collectionc.exe 200 $(LOG)

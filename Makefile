@@ -27,6 +27,7 @@ C23=$(CC) -std=c23
 CXX=c++ -std=c++11
 # To measure code size, we need to remove the sanitizers
 CFLAGS=-O0 -Wall -DNDEBUG -fsanitize=address,undefined,leak -Werror=incompatible-pointer-types -g
+BUILD_CFLAGS=-O2 -DNDEBUG -ffunction-sections -fdata-sections
 LDFLAGS=-lgmp
 RM=rm -rf
 AR=ar
@@ -115,17 +116,14 @@ external/ccc:
 ###########################################################
 
 external/Collections-C/src/libCollections-C.a: external/Collections-C
-	cd external/Collections-C/src && $(C99) $(CFLAGS) -Iinclude -c *.c
+	cd external/Collections-C/src && $(C99) $(BUILD_CFLAGS) -Iinclude -c *.c
 	cd external/Collections-C/src && $(AR) $(ARFLAGS) libCollections-C.a *.o
-	# Build optimized version
-	cd external/Collections-C/src && $(C99) -O2 -Wall -march=native -DNDEBUG -Iinclude -c *.c
-	cd external/Collections-C/src && $(AR) $(ARFLAGS) libCollections-C-fast.a *.o
 
 external/qlibc/lib/libqlibc.a: external/qlibc
-	cd external/qlibc && ./configure && make
+	cd external/qlibc && ./configure CFLAGS=$(BUILD_CFLAGS) && make
 
 external/libsrt/src/.libs/libsrt.a: external/libsrt
-	cd external/libsrt && ./bootstrap.sh && ./configure && make -j2
+	cd external/libsrt && ./bootstrap.sh && ./configure CFLAGS=$(BUILD_CFLAGS) && make -j2
 
 external/liblfds7.1.1/bin/liblfds711.a: external/liblfds7.1.1
 	cd external/liblfds7.1.1/liblfds7.1.1/liblfds711/build/gcc_gnumake && make
@@ -133,11 +131,11 @@ external/liblfds7.1.1/bin/liblfds711.a: external/liblfds7.1.1
 	cd external/liblfds7.1.1/ && ln -s liblfds7.1.1/liblfds711/inc/ . || echo "Already done"
 
 external/bstrlib/libbstrlib.a: external/bstrlib
-	cd external/bstrlib && $(C99) -O2 -march=native -Wall *.c -c
+	cd external/bstrlib && $(C99) $(BUILD_CFLAGS) -Wall *.c -c
 	cd external/bstrlib && $(AR) $(ARFLAGS) libbstrlib.a *.o
 
 external/ccc/libccc.a: external/ccc
-	cd external/ccc && $(C23) -O2 -march=native -Wall -I . source/*.c -c
+	cd external/ccc && $(C23) $(BUILD_CFLAGS) -I . source/*.c -c
 	cd external/ccc && $(AR) $(ARFLAGS) libccc.a *.o
 
 ###########################################################
@@ -381,3 +379,20 @@ umap-int-glib.exe: umap-int/umap-glib.c
 
 umap-str-glib.exe: umap-str/umap-glib.c
 	$(C99) $(CFLAGS) $< -o $@ `pkg-config --cflags --libs glib-2.0` $(LDFLAGS)
+
+
+###########################################################
+# 		Measure code size of the examples
+###########################################################
+measure-size:
+	$(MAKE)	clean
+	$(MAKE) all CFLAGS="-Os -DNDEBUG" LDFLAGS="-Wl,--gc-sections -lgmp"
+	@echo "Measuring code size of the examples..."
+	@for prefix in array-int array-str array-mpz umap-int umap-str umap-mpz; do \
+		echo For $$prefix : ; \
+		for exe in $$prefix*.exe; do \
+			size=$$(stat -c%s "$$exe"); \
+			echo "$$size bytes for $$exe"; \
+		done | sort -n ; \
+		echo ; \
+	done
