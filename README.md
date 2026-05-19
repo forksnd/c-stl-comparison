@@ -532,75 +532,82 @@ However, we can still conclude that even the best C library in this domain is mo
 We can also compare the size of the generated programs.
 The programs are built and link with "-ffunction-sections -fdata-sections -Wl,--gc-sections"
 in order to get a fair comparison (so that the functions not used are discarded).
+Compiler used is GCC 16.1
 
 | array-int size | bytes |
 |----------------|-------|
-| STC            | 16096 |
-| GLIB           | 16128 |
-| M*LIB          | 16272 |
-| CC             | 16288 |
-| CTL            | 16472 |
-| KLIB           | 16512 |
-| CollecC        | 16520 |
-| STL            | 17256 |
-| CMC            | 17576 |
+| STC            | 15768 |
+| GLIB           | 15800 |
+| CC             | 15856 |
+| M*LIB          | 15944 |
+| CTL            | 16152 |
+| CollecC        | 16176 |
+| KLIB           | 16192 |
+| CCC            | 16392 |
+| STL            | 16392 |
+| CMC            | 21344 |
 
 | array-str size | bytes |
 |----------------|-------|
-| GLIB           | 16264 |
-| M*LIB          | 16520 |
-| CollecC        | 16568 |
-| CC             | 16608 |
-| KLIB           | 16688 |
-| CTL            | 16960 |
-| STC            | 17064 |
-| CMC            | 17616 |
-| STL            | 19464 |
+| GLIB           | 15944 |
+| CC             | 16160 |
+| M*LIB          | 16200 |
+| CollecC        | 16224 |
+| KLIB           | 16360 |
+| CCC            | 16440 |
+| CTL            | 16584 |
+| STL            | 18160 |
+| STC            | 20752 |
+| CMC            | 21392 |
 
 | array-mpz size | bytes |
 |----------------|-------|
-| STC            | 16192 |
-| GLIB           | 16264 |
-| M*LIB          | 16424 |
-| CC             | 16448 |
-| CTL            | 16640 |
-| KLIB           | 16648 |
-| CollecC        | 16656 |
-| CMC            | 17848 |
-| STL            | 18480 |
+| STC            | 15864 |
+| GLIB           | 15936 |
+| CC             | 16032 |
+| M*LIB          | 16096 |
+| CollecC        | 16312 |
+| CTL            | 16320 |
+| KLIB           | 16320 |
+| CCC            | 16536 |
+| STL            | 17360 |
+| CMC            | 21624 |
 
 | umap-int size | bytes |
 |---------------|-------|
-| STC           | 16208 |
-| GLIB          | 16224 |
-| M*LIB         | 16368 |
-| CC            | 16520 |
-| CollecC       | 16712 |
-| CTL           | 16800 |
-| CMC           | 17408 |
-| STL           | 18704 |
+| STC           | 15880 |
+| GLIB          | 15904 |
+| M*LIB         | 16040 |
+| CC            | 16072 |
+| CollecC       | 16416 |
+| CTL           | 16424 |
+| CCC           | 16848 |
+| CMC           | 17128 |
+| STL           | 17368 |
 
 | umap-str size | bytes |
 |---------------|-------|
-| GLIB          | 16368 |
-| CollecC       | 16640 |
-| M*LIB         | 16672 |
-| CC            | 16808 |
-| STC           | 17224 |
-| CTL           | 17384 |
-| CMC           | 17480 |
-| STL           | 20672 |
+| GLIB          | 16048 |
+| CC            | 16336 |
+| CollecC       | 16344 |
+| M*LIB         | 16344 |
+| CCC           | 16904 |
+| CTL           | 16936 |
+| CMC           | 17200 |
+| STL           | 19136 |
+| STC           | 20912 |
 
 | umap-mpz size | bytes |
 |---------------|-------|
-| STC           | 16304 |
-| GLIB          | 16360 |
-| M*LIB         | 16600 |
-| CC            | 16744 |
-| CollecC       | 16848 |
-| CTL           | 16976 |
-| STL           | 19680 |
-| CMC           | 21800 |
+| STC           | 15976 |
+| GLIB          | 16032 |
+| M*LIB         | 16280 |
+| CC            | 16304 |
+| CollecC       | 16544 |
+| CTL           | 16552 |
+| STL           | 18592 |
+| CCC           | 21128 |
+| CMC           | 21520 |
 
 As conclusion, the size of most programs are practically the same.
 
@@ -610,76 +617,82 @@ We can also check the compilation time:
 
 | array-int compilation | time |
 |-----------------------|------|
-| CollecC               | 0.08 |
-| STC                   | 0.13 |
-| CTL                   | 0.13 |
+| CCC                   | 0.08 |
+| CollecC               | 0.12 |
 | GLIB                  | 0.14 |
-| CC                    | 0.16 |
-| KLIB                  | 0.23 |
-| CMC                   | 0.29 |
-| M*LIB                 | 0.68 |
-| STL                   | 0.85 |
+| STC                   | 0.23 |
+| CTL                   | 0.24 |
+| KLIB                  | 0.26 |
+| CC                    | 0.28 |
+| CMC                   | 0.39 |
+| M*LIB                 | 0.85 |
+| STL                   | 0.96 |
 
 | array-str compilation | time |
 |-----------------------|------|
 | CollecC               | 0.07 |
-| GLIB                  | 0.13 |
-| CC                    | 0.19 |
-| CTL                   | 0.23 |
-| CMC                   | 0.28 |
-| KLIB                  | 0.28 |
+| CCC                   | 0.08 |
+| GLIB                  | 0.14 |
+| CC                    | 0.22 |
+| CTL                   | 0.25 |
 | STC                   | 0.32 |
-| M*LIB                 | 0.85 |
-| STL                   | 0.91 |
+| CMC                   | 0.32 |
+| KLIB                  | 0.32 |
+| M*LIB                 | 0.92 |
+| STL                   | 0.95 |
 
 | array-mpz compilation | time |
 |-----------------------|------|
-| CollecC               | 0.08 |
-| STC                   | 0.16 |
-| CTL                   | 0.16 |
-| GLIB                  | 0.16 |
-| CC                    | 0.19 |
-| KLIB                  | 0.27 |
-| CMC                   | 0.32 |
-| M*LIB                 | 0.59 |
+| CCC                   | 0.10 |
+| CollecC               | 0.15 |
+| GLIB                  | 0.15 |
+| CTL                   | 0.19 |
+| STC                   | 0.24 |
+| KLIB                  | 0.31 |
+| CMC                   | 0.34 |
+| CC                    | 0.35 |
+| M*LIB                 | 0.53 |
 | STL                   | 1.29 |
 
 | umap-int compilation | time |
 |----------------------|------|
-| CollecC              | 0.09 |
+| CollecC              | 0.07 |
+| CCC                  | 0.09 |
 | GLIB                 | 0.14 |
-| STC                  | 0.15 |
+| STC                  | 0.17 |
 | CTL                  | 0.21 |
-| M*LIB                | 0.30 |
-| CMC                  | 0.33 |
-| CC                   | 0.34 |
-| STL                  | 0.88 |
+| M*LIB                | 0.29 |
+| CC                   | 0.33 |
+| CMC                  | 0.34 |
+| STL                  | 0.73 |
 
 | umap-str compilation | time |
 |----------------------|------|
-| CollecC              | 0.06 |
-| GLIB                 | 0.15 |
-| STC                  | 0.33 |
-| CMC                  | 0.33 |
-| CTL                  | 0.34 |
-| CC                   | 0.37 |
-| M*LIB                | 0.48 |
-| STL                  | 0.95 |
+| CollecC              | 0.08 |
+| CCC                  | 0.10 |
+| GLIB                 | 0.17 |
+| CMC                  | 0.35 |
+| STC                  | 0.38 |
+| CTL                  | 0.38 |
+| M*LIB                | 0.46 |
+| CC                   | 0.55 |
+| STL                  | 0.92 |
 
 | umap-mpz compilation | time |
 |----------------------|------|
-| CollecC              | 0.11 |
-| STC                  | 0.16 |
-| GLIB                 | 0.16 |
+| CollecC              | 0.08 |
+| CCC                  | 0.12 |
+| GLIB                 | 0.15 |
+| STC                  | 0.18 |
 | CTL                  | 0.28 |
-| M*LIB                | 0.34 |
+| M*LIB                | 0.33 |
+| CMC                  | 0.36 |
 | CC                   | 0.38 |
-| CMC                  | 0.41 |
-| STL                  | 1.29 |
+| STL                  | 1.18 |
 
 C++ is the slowest to compile by far. M\*LIB is also quite slow to compile.
 Except that that, the voidp based libraries are naturally faster to compile,
-but the speed difference is not particulary notable on this small example.
+but the speed difference is not particulary notable on this small example and should be compared on a more complex example.
 
 # Performance Comparison
 
