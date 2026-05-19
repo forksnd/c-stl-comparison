@@ -606,6 +606,76 @@ As conclusion, the size of most programs are practically the same.
 
 NOTE: GLIB is dynamically linked instead of being statically linked.
 
+We can also check the compilation time:
+
+| array-int compilation | time |
+|-----------------------|------|
+| CollecC               | 0.08 |
+| STC                   | 0.13 |
+| CTL                   | 0.13 |
+| GLIB                  | 0.14 |
+| CC                    | 0.16 |
+| KLIB                  | 0.23 |
+| CMC                   | 0.29 |
+| M*LIB                 | 0.68 |
+| STL                   | 0.85 |
+
+| array-str compilation | time |
+|-----------------------|------|
+| CollecC               | 0.07 |
+| GLIB                  | 0.13 |
+| CC                    | 0.19 |
+| CTL                   | 0.23 |
+| CMC                   | 0.28 |
+| KLIB                  | 0.28 |
+| STC                   | 0.32 |
+| M*LIB                 | 0.85 |
+| STL                   | 0.91 |
+
+| array-mpz compilation | time |
+|-----------------------|------|
+| CollecC               | 0.08 |
+| STC                   | 0.16 |
+| CTL                   | 0.16 |
+| GLIB                  | 0.16 |
+| CC                    | 0.19 |
+| KLIB                  | 0.27 |
+| CMC                   | 0.32 |
+| M*LIB                 | 0.59 |
+| STL                   | 1.29 |
+
+| umap-int compilation | time |
+|----------------------|------|
+| CollecC              | 0.09 |
+| GLIB                 | 0.14 |
+| STC                  | 0.15 |
+| CTL                  | 0.21 |
+| M*LIB                | 0.30 |
+| CMC                  | 0.33 |
+| CC                   | 0.34 |
+| STL                  | 0.88 |
+
+| umap-str compilation | time |
+|----------------------|------|
+| CollecC              | 0.06 |
+| GLIB                 | 0.15 |
+| STC                  | 0.33 |
+| CMC                  | 0.33 |
+| CTL                  | 0.34 |
+| CC                   | 0.37 |
+| M*LIB                | 0.48 |
+| STL                  | 0.95 |
+
+| umap-mpz compilation | time |
+|----------------------|------|
+| CollecC              | 0.11 |
+| STC                  | 0.16 |
+| GLIB                 | 0.16 |
+| CTL                  | 0.28 |
+| M*LIB                | 0.34 |
+| CC                   | 0.38 |
+| CMC                  | 0.41 |
+| STL                  | 1.29 |
 
 # Performance Comparison
 
