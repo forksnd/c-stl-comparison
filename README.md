@@ -677,6 +677,10 @@ We can also check the compilation time:
 | CMC                  | 0.41 |
 | STL                  | 1.29 |
 
+C++ is the slowest to compile by far. M\*LIB is also quite slow to compile.
+Except that that, the voidp based libraries are naturally faster to compile,
+but the speed difference is not particulary notable on this small example.
+
 # Performance Comparison
 
 The [bench](https://github.com/P-p-H-d/c-stl-comparison/tree/master/bench)
