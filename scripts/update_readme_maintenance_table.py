@@ -72,6 +72,25 @@ def format_days(value: Any) -> str:
     return f"{value} days"
 
 
+def format_last_commit_age(value: Any) -> str:
+    if value is None:
+        return "NA"
+    if not isinstance(value, (int, float)):
+        return f"{value} days"
+
+    age_days = float(value)
+    if age_days < 30.4375:
+        color = "green"
+    elif age_days < 182.625:
+        color = "yellow"
+    elif age_days < 365.25:
+        color = "orange"
+    else:
+        color = "red"
+
+    return f"<span style=\"color: {color};\">{age_days:.2f} days</span>"
+
+
 def format_years(value: float | None) -> str:
     if value is None:
         return "NA"
@@ -152,7 +171,7 @@ def build_rows(libraries: list[str], data: dict[str, Any], analysis_date: dt.dat
 
         values = [
             to_text(entry.get("Number of stars")),
-            format_days(entry.get("Last commit age (days)")),
+            format_last_commit_age(entry.get("Last commit age (days)")),
             to_text(entry.get("Number of commits")),
             format_years(project_age_years),
             format_release_date(entry.get("Last release date")),
